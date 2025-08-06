@@ -7,7 +7,8 @@ func (q Queryable[T]) First() *T {
 	}
 	var result *T
 	q(func(item T) bool {
-		result = &item
+		temp := item // копируем значение
+		result = &temp
 		return false // останавливаем после первого
 	})
 	return result
