@@ -5,6 +5,7 @@ import "testing"
 // queryable_test.go (дополнение)
 func TestIntersect(t *testing.T) {
 	t.Run("пересечение с общими элементами", func(t *testing.T) {
+		t.Parallel()
 		q1 := ToQueryable([]int{1, 2, 3, 4})
 		q2 := ToQueryable([]int{3, 4, 5, 6})
 
@@ -15,6 +16,7 @@ func TestIntersect(t *testing.T) {
 	})
 
 	t.Run("нет общих элементов", func(t *testing.T) {
+		t.Parallel()
 		q1 := ToQueryable([]string{"a", "b"})
 		q2 := ToQueryable([]string{"c", "d"})
 
@@ -25,6 +27,7 @@ func TestIntersect(t *testing.T) {
 	})
 
 	t.Run("полное совпадение", func(t *testing.T) {
+		t.Parallel()
 		q1 := ToQueryable([]int{1, 2})
 		q2 := ToQueryable([]int{1, 2})
 
@@ -35,6 +38,7 @@ func TestIntersect(t *testing.T) {
 	})
 
 	t.Run("дубликаты в первой последовательности", func(t *testing.T) {
+		t.Parallel()
 		q1 := ToQueryable([]int{1, 2, 2, 3})
 		q2 := ToQueryable([]int{2, 3, 4})
 
@@ -45,6 +49,7 @@ func TestIntersect(t *testing.T) {
 	})
 
 	t.Run("одна из последовательностей пуста", func(t *testing.T) {
+		t.Parallel()
 		q1 := ToQueryable([]int{1, 2})
 		q2 := ToQueryable([]int{})
 
@@ -55,6 +60,7 @@ func TestIntersect(t *testing.T) {
 	})
 
 	t.Run("ленивая остановка", func(t *testing.T) {
+		t.Parallel()
 		q1 := ToQueryable([]int{2, 3, 4})
 		q2 := ToQueryable([]int{1, 2, 3})
 
@@ -62,5 +68,33 @@ func TestIntersect(t *testing.T) {
 
 		expected := []int{2}
 		assertEqual(t, result, expected, "без дубликатов")
+	})
+
+	t.Run("nil первая последовательность", func(t *testing.T) {
+		t.Parallel()
+		var q1 Queryable[int]
+		q2 := ToQueryable([]int{1, 2})
+
+		result := q1.Intersect(q2).ToSlice()
+		expected := []int{}
+		assertEqual(t, result, expected, "nil первая")
+	})
+
+	t.Run("nil вторая последовательность", func(t *testing.T) {
+		t.Parallel()
+		q1 := ToQueryable([]int{1, 2})
+		var q2 Queryable[int]
+
+		result := q1.Intersect(q2).ToSlice()
+		expected := []int{}
+		assertEqual(t, result, expected, "nil вторая")
+	})
+
+	t.Run("обе nil", func(t *testing.T) {
+		t.Parallel()
+		var q1, q2 Queryable[int]
+		result := q1.Intersect(q2).ToSlice()
+		expected := []int{}
+		assertEqual(t, result, expected, "обе nil")
 	})
 }

@@ -4,15 +4,21 @@ package query
 // Дубликаты удаляются. Порядок — как в первой последовательности.
 func (q Queryable[T]) Except(second Queryable[T]) Queryable[T] {
 	return func(yield func(T) bool) {
-		// Собираем все элементы из second
+		// Обработка second: если nil — считаем, что он пустой
 		excludeSet := make(map[T]bool)
-		second(func(item T) bool {
-			excludeSet[item] = true
-			return true
-		})
+		if second != nil {
+			second(func(item T) bool {
+				excludeSet[item] = true
+				return true
+			})
+		}
 
-		// Проходим по первой последовательности и пропускаем те, что есть в excludeSet
-		seen := make(map[T]bool) // чтобы не выдавать дубликаты
+		// Обработка q: если nil — ничего не итерируем
+		if q == nil {
+			return
+		}
+
+		seen := make(map[T]bool) // для дедупликации
 		q(func(item T) bool {
 			if !excludeSet[item] && !seen[item] {
 				seen[item] = true
