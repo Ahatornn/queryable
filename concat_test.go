@@ -90,16 +90,3 @@ func TestConcat_Method(t *testing.T) {
 		}
 	})
 }
-
-// Вспомогательная функция для сравнения слайсов
-func slicesEqual[T comparable](a, b []T) bool {
-	if len(a) != len(b) {
-		return false
-	}
-	for i := range a {
-		if a[i] != b[i] {
-			return false
-		}
-	}
-	return true
-}
