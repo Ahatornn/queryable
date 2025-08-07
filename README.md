@@ -45,7 +45,7 @@ result := query.ToQueryable(nums1).
     Take(2).
     ToSlice()
 
-fmt.Println(result) // Вывод: [90 100]
+fmt.Println(result) // result: [90 100]
 ```
 
 ### 🛠 Without the library (manual)
