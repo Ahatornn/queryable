@@ -1,9 +1,9 @@
 package query
 
-// All Проверяет все элементы на удовлетворение условию
+// All Checks all elements to see if the condition is met
 func (q Queryable[T]) All(predicate func(T) bool) bool {
 	if q == nil {
-		return true // по соглашению: все элементы пустого множества удовлетворяют любому условию
+		return true
 	}
 	var any bool
 	var all = true
@@ -11,9 +11,9 @@ func (q Queryable[T]) All(predicate func(T) bool) bool {
 		any = true
 		if !predicate(item) {
 			all = false
-			return false // останавливаем
+			return false
 		}
 		return true
 	})
-	return !any || all // если нет элементов — true, иначе проверяем all
+	return !any || all
 }

@@ -1,15 +1,15 @@
 package query
 
-// First первый элемент или nil
+// First is the first element or nil
 func (q Queryable[T]) First() *T {
 	if q == nil {
 		return nil
 	}
 	var result *T
 	q(func(item T) bool {
-		temp := item // копируем значение
+		temp := item
 		result = &temp
-		return false // останавливаем после первого
+		return false
 	})
 	return result
 }

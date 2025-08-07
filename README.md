@@ -1,38 +1,38 @@
 # queryable: LINQ-style Iterators for Go
 [![Тесты](https://github.com/ahatornn/queryable/actions/workflows/test.yml/badge.svg)](https://github.com/ahatornn/queryable/actions/workflows/test.yml)
 
-`queryable` — это библиотека для Go, вдохновлённая C# LINQ (Language Integrated Query), которая позволяет работать с данными в функциональном стиле с использованием **дженериков** и **ленивых итераторов**.
+`queryable` is a Go library inspired by **C# LINQ** (Language Integrated Query) that enables functional-style data processing using **generics** and **lazy iterators**.
 
-С её помощью ты можешь писать чистый, читаемый и выразительный код для фильтрации, преобразования, сортировки и агрегации данных — без циклов `for` и временных срезов.
+With it, you can write clean, readable, and expressive code for filtering, transforming, and aggregating data — without `for` loops or temporary slices.
 
-> Похоже на LINQ, но на Go. Ленивые вычисления. Поддержка дженериков. Безопасно по типам.
-
----
-
-## ✨ Особенности
-
-- ✅ **LINQ-подобные методы**: `Where`, `Select`, `Take`, `Skip`, `First`, `Any`, `All`, `Count` и другие.
-- ✅ **Ленивые итераторы** — данные обрабатываются по мере необходимости.
-- ✅ **Дженерики (Go 1.18+)** — типобезопасность без приведения типов.
-- ✅ **Цепочки операций** — красивый fluent-интерфейс.
-- ✅ **Эффективность** — минимум аллокаций, подходит для больших данных.
-- ✅ **Безопасная работа с nil** — методы корректно обрабатывают `nil` последовательности, не вызывая паник.
+> Feels like LINQ, but in Go. Lazy evaluation. Generic. Type-safe.
 
 ---
 
-## 🚀 Установка
+## ✨ Features
 
-Используйте `go get`, чтобы добавить библиотеку в ваш проект:
+- ✅ **LINQ-like methods**: `Where`, `Select`, `Take`, `Skip`, `First`, `Any`, `All`, `Count`, and more.
+- ✅ **Lazy iterators** — data is processed on-demand.
+- ✅ **Generics (Go 1.18+)** — type safety without type casting.
+- ✅ **Method chaining** — fluent, readable APIs.
+- ✅ **Efficiency** — minimal allocations, suitable for large datasets.
+- ✅ **Nil-safe operations** — methods safely handle `nil` sequences without panics.
+
+---
+
+## 🚀 Installation
+
+Use `go get` to add the library to your project:
 
 ```bash
 go get github.com/ahatornn/queryable
 ```
 
-## ⚖️ Сравнение: ванильный Go vs Queryable
+## ⚖️ Comparison: Vanilla Go vs Queryable
 
-Представим задачу: объединить два слайса, оставить числа больше 50, пропустить первые 3, взять следующие 2.
+Let’s say you want to: Merge two slices, keep numbers greater than 50, skip the first 3, and take the next 2.
 
-### ✅ Используя библиотеку queryable
+### ✅ Using queryable
 
 ```go
 nums1 := []int{10, 20, 60, 70}
@@ -48,7 +48,7 @@ result := query.ToQueryable(nums1).
 fmt.Println(result) // Вывод: [90 100]
 ```
 
-### 🛠 Без библиотеки (ручной способ)
+### 🛠 Without the library (manual)
 
 ```go
 nums1 := []int{10, 20, 60, 70}

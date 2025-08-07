@@ -1,6 +1,6 @@
 package query
 
-// ForEach Выполняет действие для каждого элемента
+// ForEach Performs an action on each element
 func (q Queryable[T]) ForEach(action func(T)) {
 	if q == nil {
 		return

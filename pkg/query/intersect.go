@@ -1,14 +1,13 @@
 package query
 
-// Intersect возвращает элементы, которые присутствуют и в текущей последовательности,
-// и в `second`. Дубликаты удаляются. Порядок — как в первой последовательности.
+// Intersect returns elements that are both in the current sequence,
+// and `second`. Duplicates are removed. The order is the same as in the first sequence.
 //
-// Пустые (nil) последовательности обрабатываются как пустые наборы.
-// ⚠️ Внимание: эта операция полностью буферизует `second` в память (создаёт map),
-// поэтому она не ленивая по отношению к `second`.
+// Empty (nil) sequences are treated as empty sets.
+// ⚠️ Warning: this operation completely buffers `second` into memory (creates a map),
+// so it is not lazy with respect to `second`.
 func (q Queryable[T]) Intersect(second Queryable[T]) Queryable[T] {
 	return func(yield func(T) bool) {
-		// Собираем множество из second
 		secondSet := make(map[T]bool)
 		if second != nil {
 			second(func(item T) bool {
@@ -17,17 +16,16 @@ func (q Queryable[T]) Intersect(second Queryable[T]) Queryable[T] {
 			})
 		}
 
-		// Если q nil — ничего не делаем
 		if q == nil {
 			return
 		}
 
-		seen := make(map[T]bool) // для дедупликации
+		seen := make(map[T]bool)
 		q(func(item T) bool {
 			if secondSet[item] && !seen[item] {
 				seen[item] = true
 				if !yield(item) {
-					return false // остановка от потребителя
+					return false
 				}
 			}
 			return true
