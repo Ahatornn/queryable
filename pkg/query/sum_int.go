@@ -1,7 +1,6 @@
 package query
 
-// SumInt вычисляет сумму значений, извлечённых из элементов с помощью selector.
-// Пример: q.Sum(func(item T) int { return item.Age })
+// SumInt calculates the sum of the values extracted from the items by selector.
 func (q Queryable[T]) SumInt(selector func(T) int) int {
 	if q == nil {
 		return 0

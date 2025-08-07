@@ -1,6 +1,6 @@
 package query
 
-// Count Подсчёт элементов
+// Count counting elements
 func (q Queryable[T]) Count() int {
 	if q == nil {
 		return 0

@@ -1,7 +1,7 @@
 package query
 
-// Distinct возвращает последовательность без дубликатов.
-// Сохраняет порядок первого вхождения каждого элемента.
+// Distinct returns a sequence without duplicates.
+// Preserves the order of the first occurrence of each element.
 func (q Queryable[T]) Distinct() Queryable[T] {
 	if q == nil {
 		return Empty[T]()
@@ -13,7 +13,7 @@ func (q Queryable[T]) Distinct() Queryable[T] {
 			if !seen[item] {
 				seen[item] = true
 				if !yield(item) {
-					return false // остановка от потребителя
+					return false
 				}
 			}
 			return true

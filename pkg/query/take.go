@@ -1,6 +1,6 @@
 package query
 
-// Take Взять первые n элементов
+// Take the first n elements
 func (q Queryable[T]) Take(n int) Queryable[T] {
 	if q == nil || n <= 0 {
 		return Empty[T]()

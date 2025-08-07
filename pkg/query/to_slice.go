@@ -1,5 +1,6 @@
 package query
 
+// ToSlice converts a sequence to a slice
 func (q Queryable[T]) ToSlice() []T {
 	if q == nil {
 		return nil

@@ -1,6 +1,6 @@
 package query
 
-// Where Фильтрация
+// Where filtering
 func (q Queryable[T]) Where(predicate func(T) bool) Queryable[T] {
 	if q == nil {
 		return nil

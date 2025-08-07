@@ -1,6 +1,6 @@
 package query
 
-// Select Определяет проекцию. Пока сложно использовать из за any
+// Select defines the projection. It is difficult to use now because of any
 func (q Queryable[T]) Select(mapper func(T) any) Queryable[any] {
 	if q == nil {
 		return Empty[any]()

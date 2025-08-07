@@ -1,6 +1,6 @@
 package query
 
-// Skip пропускает первые n элементов
+// Skip skips the first n elements
 func (q Queryable[T]) Skip(n int) Queryable[T] {
 	if q == nil || n <= 0 {
 		return q

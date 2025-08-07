@@ -1,6 +1,6 @@
 package query
 
-// Any Проверяет, есть ли хотя бы один элемент?
+// Any Checks if there is at least one element?
 func (q Queryable[T]) Any() bool {
 	if q == nil {
 		return false
@@ -8,7 +8,7 @@ func (q Queryable[T]) Any() bool {
 	var has bool
 	q(func(T) bool {
 		has = true
-		return false // останавливаемся на первом
+		return false
 	})
 	return has
 }
