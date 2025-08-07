@@ -1,4 +1,5 @@
 # queryable: LINQ-style Iterators for Go
+[![Тесты](https://github.com/ahatornn/queryable/actions/workflows/test.yml/badge.svg)](https://github.com/ahatornn/queryable/actions/workflows/test.yml)
 
 `queryable` — это библиотека для Go, вдохновлённая C# LINQ (Language Integrated Query), которая позволяет работать с данными в функциональном стиле с использованием **дженериков** и **ленивых итераторов**.
 
